@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Home screen widget layout for OmniWeather.
+  Target size: 4×2 cells (full-width, 2 rows). Minimum enforced by widget_info.xml.
+  Uses RemoteViews-compatible views only (no ConstraintLayout, no WebView).
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@drawable/widget_background">
+
+    <!-- Row 1: Location name + last-updated time -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/widget_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="11sp"
+            android:textColor="#B0C4D8"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="—" />
+
+        <TextView
+            android:id="@+id/widget_updated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="9sp"
+            android:textColor="#607D8B"
+            android:text="" />
+
+    </LinearLayout>
+
+    <!-- Row 2: Large temperature + condition / feels-like column -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="2dp">
+
+        <TextView
+            android:id="@+id/widget_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="36sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:text="—" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:id="@+id/widget_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#B0C4D8"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="—" />
+
+            <TextView
+                android:id="@+id/widget_feels_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="#8090A4"
+                android:text="" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Row 3: Precip probability + Wind -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/widget_precip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="10sp"
+            android:textColor="#7BAFD4"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/widget_wind"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="10sp"
+            android:textColor="#8090A4"
+            android:text="" />
+
+    </LinearLayout>
+
+    <!-- Thin divider — use TextView, not View; bare <View> is not in the
+         RemoteViews allowlist on Android < 12 and causes "couldn't add widget". -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="4dp"
+        android:background="#28607D8B"
+        android:text="" />
+
+    <!-- Row 4: 3-day forecast strip (fills remaining height) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Day 0 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/widget_day0_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="#8090A4"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/widget_day0_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/widget_day0_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="#B0C4D8"
+                android:text="" />
+
+        </LinearLayout>
+
+        <!-- Day 1 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/widget_day1_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="#8090A4"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/widget_day1_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/widget_day1_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="#B0C4D8"
+                android:text="" />
+
+        </LinearLayout>
+
+        <!-- Day 2 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/widget_day2_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="#8090A4"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/widget_day2_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/widget_day2_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="#B0C4D8"
+                android:text="" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,106 @@
+name: omniweather
+description: A weather app combining Open-Meteo forecasts, historical data, and Xweather lightning.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management
+  flutter_riverpod: ^2.5.1
+
+  # HTTP / WebSocket
+  dio: ^5.4.3+1
+  web_socket_channel: ^2.4.0
+
+  # Local storage
+  shared_preferences: ^2.2.3
+  flutter_secure_storage: ^9.0.0
+
+  # UI / charts / map
+  fl_chart: ^0.68.0
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+  shimmer: ^3.0.0
+  intl: ^0.19.0
+  google_fonts: ^6.2.1
+
+  # Location
+  geolocator: ^12.0.0
+
+  # Home screen widget
+  home_widget: ^0.7.0
+
+  # WebView — used for the lightning map (lightningmaps.org)
+  webview_flutter: ^4.10.0
+
+  # Models / serialisation
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.9.0
+
+  # Splash screen (runtime dependency)
+  flutter_native_splash: ^2.4.0
+
+  # Utils
+  logger: ^2.4.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.9
+  freezed: ^2.5.2
+  json_serializable: ^6.8.0
+
+  # Icon & splash generators (run once, then remove if preferred)
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+# ── App icon config ────────────────────────────────────────────────────────────
+# Run:  dart run flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app_icon.jpg"
+  # Adaptive icon for Android 8+ (foreground + no background = transparent)
+  adaptive_icon_foreground: "assets/images/app_icon.jpg"
+  adaptive_icon_background: "#0D1B2A"
+  # iOS: remove white padding so the circular design fills the rounded square
+  remove_alpha_ios: true
+  min_sdk_android: 21
+  web:
+    generate: false
+
+# ── Splash screen config ───────────────────────────────────────────────────────
+# Run:  dart run flutter_native_splash:create
+flutter_native_splash:
+  # Use the full branded splash image as a full-screen background
+  image: assets/images/splash.jpg
+  # Dark navy background — matches the splash image background colour
+  color: "#0D1B2A"
+  # Android 12+ (API 31+) uses a separate icon-style splash.
+  # We reuse the app icon so Android 12 keeps branding consistent.
+  android_12:
+    image: assets/images/app_icon.jpg
+    color: "#0D1B2A"
+    icon_background_color: "#0D1B2A"
+    # Dark-mode variants go inside android_12, not as a sibling key
+    image_dark: assets/images/app_icon.jpg
+    color_dark: "#080F18"
+    icon_background_color_dark: "#080F18"
+  # Dark-mode variant: same images, slightly deeper background
+  color_dark: "#080F18"
+  image_dark: assets/images/splash.jpg
+  fullscreen: true
+  # Keep the splash until the app is ready
+  android_gravity: center
+  ios_content_mode: scaleAspectFit
