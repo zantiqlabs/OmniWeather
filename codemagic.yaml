@@ -1,0 +1,54 @@
+workflows:
+  ios-workflow:
+    name: OmniWeather iOS
+    max_build_duration: 60
+
+    environment:
+      groups:
+        - app_store_credentials
+      flutter: stable
+      xcode: latest
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.zantiqlabs.omniweather
+
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
+
+    scripts:
+      - name: Get Flutter packages
+        script: flutter pub get
+
+      - name: Generate Isar code
+        script: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Set up code signing
+        script: xcode-project use-profiles
+
+      - name: Build iOS IPA
+        script: |
+          flutter build ipa --release \
+            --export-options-plist=/Users/builder/export_options.plist
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+
+    publishing:
+      email:
+        recipients:
+          - zantiqlabs@gmail.com
+        notify:
+          success: true
+          failure: true
+
+      app_store_connect:
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
+        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        submit_to_testflight: true
