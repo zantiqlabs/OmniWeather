@@ -61,5 +61,7 @@
 	<!-- Warning — add now to avoid a second rejection -->
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app does not use your location</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>
