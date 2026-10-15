@@ -55,5 +55,11 @@
 	<array>
 		<string>$(AppIdentifierPrefix)com.zantiqlabs.omniweather</string>
 	</array>
+	<!-- Required — blocks the build -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Choose images from your photo library for film and series posters</string>
+	<!-- Warning — add now to avoid a second rejection -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app does not use your location</string>
 </dict>
 </plist>
