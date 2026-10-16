@@ -7,8 +7,8 @@
 .pub/
 build/
 *.iml
-*.g.dart
-*.freezed.dart
+# *.g.dart
+# *.freezed.dart
 *.mocks.dart
 
 # Android
